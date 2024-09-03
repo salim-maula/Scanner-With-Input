@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scanner_with_input/scanner/controller/scan_page_controller.dart';
 
-
 class ScanPage extends StatelessWidget {
   final ScanPageController controller = Get.put(ScanPageController());
 
@@ -21,6 +20,7 @@ class ScanPage extends StatelessWidget {
               autofocus: true,
               onChanged: (content) {
                 if (content.isNotEmpty) {
+                  print("AAAAAAA");
                   controller.handleScannerInput(content);
                   controller.requestFocusScanner();
                 }

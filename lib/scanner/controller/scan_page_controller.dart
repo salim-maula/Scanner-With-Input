@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:scanner_with_input/helpers/focus_node.dart';
 
 class ScanPageController extends GetxController {
   TextEditingController textEditingController = TextEditingController();
@@ -11,13 +10,15 @@ class ScanPageController extends GetxController {
   void requestFocusScanner() {
     textFieldFocus.requestFocus();
 
-    Future.delayed(Duration(microseconds: 100), () {
+    Future.delayed(Duration(), () {
       SystemChannels.textInput.invokeMethod('TextInput.hide');
     });
   }
 
   void handleScannerInput(String scannedData) {
+    print("DDDDDDDD 11111111");
     if (scannedData.isNotEmpty) {
+      print("DDDDDDDD 222222222");
       listData.add(scannedData);
       textEditingController.clear();
     }
@@ -25,9 +26,11 @@ class ScanPageController extends GetxController {
   }
 
   void _handleScannerInput(RawKeyEvent event) {
+    print("CCCCCCCC  1111111");
     if (event is RawKeyDownEvent) {
       final String? scannedKey = event.logicalKey.keyLabel;
       if (scannedKey == 'Game Button Right 1') {
+        print("CCCCCCCC  22222222222");
         handleScannerInput(textEditingController.text);
       }
     }
@@ -43,7 +46,9 @@ class ScanPageController extends GetxController {
     RawKeyboard.instance.addListener(_handleScannerInput);
 
     textEditingController.addListener(() {
+      print("BBBBBBBB 11111111");
       if (textEditingController.text.isNotEmpty) {
+        print("BBBBBBBB 22222222");
         handleScannerInput(textEditingController.text);
       }
     });
